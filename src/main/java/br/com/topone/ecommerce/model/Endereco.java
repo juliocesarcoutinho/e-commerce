@@ -3,6 +3,7 @@ package br.com.topone.ecommerce.model;
 import br.com.topone.ecommerce.enums.TipoEndereco;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
+@ToString
 @SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco", allocationSize = 1, initialValue = 1)
 public class Endereco implements Serializable {
 

@@ -2,6 +2,7 @@ package br.com.topone.ecommerce.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
     @Entity
     @Getter
     @Setter
+    @ToString
     @Table(name = "forma_pagamento")
     @SequenceGenerator(name = "seq_forma_pagamento", sequenceName = "seq_forma_pagamento", allocationSize = 1,
             initialValue = 1)

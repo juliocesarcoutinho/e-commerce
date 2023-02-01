@@ -3,6 +3,7 @@ package br.com.topone.ecommerce.model;
 import br.com.topone.ecommerce.enums.StatusContaReceber;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "conta_receber")
 @SequenceGenerator(name = "seq_conta_receber", sequenceName = "seq_conta_receber", allocationSize = 1, initialValue = 1)
 public class ContaReceber implements Serializable {
