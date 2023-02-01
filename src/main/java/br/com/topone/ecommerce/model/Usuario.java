@@ -2,6 +2,9 @@ package br.com.topone.ecommerce.model;
 
 import javax.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuario")
+@ToString
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
 public class Usuario implements UserDetails {
 
