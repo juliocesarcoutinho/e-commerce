@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 
 @Entity

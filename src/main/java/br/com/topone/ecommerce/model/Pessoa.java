@@ -2,8 +2,6 @@ package br.com.topone.ecommerce.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +26,7 @@ public abstract class Pessoa implements Serializable {
     private String telefone;
 
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Endereco> enderecos = new ArrayList<Endereco>();
+    private List<Endereco> enderecos = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

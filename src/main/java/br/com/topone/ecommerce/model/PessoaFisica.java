@@ -1,6 +1,5 @@
 package br.com.topone.ecommerce.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
