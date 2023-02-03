@@ -1,0 +1,19 @@
+package br.com.topone.ecommerce.services;
+
+import br.com.topone.ecommerce.model.Acesso;
+import br.com.topone.ecommerce.repository.AcessoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AcessoService {
+
+    @Autowired
+    private AcessoRepository acessoRepository;
+
+    public void save(Acesso acesso){
+
+        acessoRepository.save(acesso);
+    }
+
+}
