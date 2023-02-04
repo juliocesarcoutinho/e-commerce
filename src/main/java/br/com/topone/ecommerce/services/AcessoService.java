@@ -11,9 +11,9 @@ public class AcessoService {
     @Autowired
     private AcessoRepository acessoRepository;
 
-    public void save(Acesso acesso){
+    public Acesso save(Acesso acesso){
 
-        acessoRepository.save(acesso);
+        return acessoRepository.save(acesso);
     }
 
 }
