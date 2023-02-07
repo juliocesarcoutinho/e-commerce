@@ -1,5 +1,6 @@
 package br.com.topone.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class Acesso implements GrantedAuthority  {
     private String descricao; /*Exemplo Role_admin*/
 
     @Override
+    @JsonIgnore
     public String getAuthority() {
         return descricao;
     }
