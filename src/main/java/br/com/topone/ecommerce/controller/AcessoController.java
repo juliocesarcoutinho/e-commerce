@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -36,4 +35,32 @@ public class AcessoController {
         return new ResponseEntity<>("Acesso Removido",HttpStatus.OK);
 
     }
+
+    @ResponseBody
+    @DeleteMapping(value = "/deleteAcessoPorId/{id}")
+    public ResponseEntity<?> deleteAcessoPorId(@PathVariable("id") Long id){
+
+        acessoRepository.deleteById(id);
+        return new ResponseEntity<>("Acesso Removido",HttpStatus.OK);
+
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/listarAcessoDesc/{desc}")
+    public ResponseEntity<List<Acesso>> listarAcessoPorDesc(@PathVariable("desc") String desc){
+
+        List<Acesso> acessos = acessoRepository.buscarAcessoDesc(desc);
+        return new ResponseEntity<List<Acesso>>(acessos, HttpStatus.OK);
+
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/listarAcessoPorId/{id}")
+    public ResponseEntity<?> listarAcessoPorId(@PathVariable("id") Long id){
+
+        Acesso acesso = acessoRepository.findById(id).get();
+        return new ResponseEntity<>(acesso,HttpStatus.OK);
+
+    }
+
 }
