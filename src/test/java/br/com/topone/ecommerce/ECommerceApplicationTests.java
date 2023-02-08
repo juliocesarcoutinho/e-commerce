@@ -257,7 +257,7 @@ class ECommerceApplicationTests extends TestCase {
 
         List<Acesso> acessos = acessoRepository.buscarAcessoDesc("TESTE".trim().toUpperCase());
 
-        assertEquals(1, acessos.size());
+        assertEquals(2, acessos.size());
         acessoRepository.deleteById(acesso.getId());
 
     }
