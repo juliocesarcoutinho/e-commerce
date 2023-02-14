@@ -1,7 +1,11 @@
 package br.com.topone.ecommerce.security;
 
+import br.com.topone.ecommerce.ApplicationContextLoad;
+import br.com.topone.ecommerce.model.Usuario;
+import br.com.topone.ecommerce.repository.UsuarioRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -55,6 +59,21 @@ public class JWTTokenAutenticationService {
                     .setSigningKey(SECRET)
                     .parseClaimsJws(tokenLimpo)
                     .getBody().getSubject();
+
+            if (user != null){
+                Usuario usuario = ApplicationContextLoad.getApplicationContext()
+                        .getBean(UsuarioRepository.class)
+                        .findUserByLogin(user);
+
+                if (usuario != null){
+                    return new UsernamePasswordAuthenticationToken(
+                            usuario.getLogin(),
+                            usuario.getSenha(),
+                            usuario.getAuthorities()
+                    );
+                }
+            }
+
         }
         liberacaoCors(response);
         return null;

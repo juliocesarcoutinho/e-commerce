@@ -11,6 +11,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.http.HttpSessionListener;
 
@@ -21,6 +25,22 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements H
 
     @Autowired
     private ImplementacaoUserDetailService implementacaoUserDetailService;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .disable().authorizeRequests().antMatchers("/")
+                .permitAll().antMatchers("/index").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                /*Redireciona ou da um retorno para o index quando é deslocado*/
+                .anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
+                /*Mapeia o logout*/
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                /*Filtra as requisições para o Login de JWT*/
+                .and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager())
+                        , UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTApiAutenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 
     /*Consulta use no banco com o security*/
     @Override

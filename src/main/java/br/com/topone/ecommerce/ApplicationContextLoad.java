@@ -19,7 +19,7 @@ public class ApplicationContextLoad implements ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
-    public ApplicationContext getApplicationContext() {
+    public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
 }
