@@ -22,7 +22,7 @@ public class JWTTokenAutenticationService {
 
     /*Token de validade 11 dias */
     private static final long EXPIRATION_TIME = 959990000;
-    private static final String SECRET = "";
+    private static final String SECRET = "Oramap82";
     private static final String TOKEN_PREFIX = "Bearer";
 
     private static final String HEADER_STRING = "Authorization";
