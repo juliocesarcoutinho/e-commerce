@@ -22,18 +22,22 @@ public class JWTTokenAutenticationService {
 
     /*Token de validade 11 dias */
     private static final long EXPIRATION_TIME = 959990000;
-    private static final String SECRET = "Oramap82";
+
+    /*Chave Secreta*/
+    private static final String SECRET = "q1w2e3r4";
+
+    /*Prefixo do token tipo Bearer*/
     private static final String TOKEN_PREFIX = "Bearer";
 
     private static final String HEADER_STRING = "Authorization";
 
-    /*Gera o token e da a reposta do JWT*/
+    /*Gera o token e da a reposta para o cliente do JWT*/
     public void addAutentication(HttpServletResponse response, String usename) throws IOException {
         /*Montagem do token*/
         String JWT = Jwts.builder() /*Chama o Gerador de token*/
                 .setSubject(usename) /*Adiciona o usuario*/
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) /*tempo de expiração*/
-                .signWith(SignatureAlgorithm.ES512, SECRET)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
 
         String token = TOKEN_PREFIX + " " + JWT;
@@ -54,7 +58,7 @@ public class JWTTokenAutenticationService {
         if (token != null){
             String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
 
-            /*Faz a Liberação do token e obtem o usuario*/
+            /*Faz a Liberação do token e obtem o usuario (Extrai de dentro do token o usuario*/
             String user = Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(tokenLimpo)
@@ -79,20 +83,25 @@ public class JWTTokenAutenticationService {
         return null;
     }
 
-    /*Correção de erro de Cors nos navegadores*/
-    private void liberacaoCors(HttpServletResponse response){
+    /*Fazendo liberação contra erro de COrs no navegador*/
+    private void liberacaoCors(HttpServletResponse response) {
+
         if (response.getHeader("Access-Control-Allow-Origin") == null) {
             response.addHeader("Access-Control-Allow-Origin", "*");
         }
+
         if (response.getHeader("Access-Control-Allow-Headers") == null) {
             response.addHeader("Access-Control-Allow-Headers", "*");
         }
+
         if (response.getHeader("Access-Control-Request-Headers") == null) {
             response.addHeader("Access-Control-Request-Headers", "*");
         }
+
         if (response.getHeader("Access-Control-Allow-Methods") == null) {
             response.addHeader("Access-Control-Allow-Methods", "*");
         }
+
     }
 
 }

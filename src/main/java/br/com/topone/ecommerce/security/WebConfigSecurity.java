@@ -42,7 +42,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements H
                 .addFilterBefore(new JWTApiAutenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-    /*Consulta use no banco com o security*/
+    /*Consulta user no banco com o security*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(implementacaoUserDetailService)
